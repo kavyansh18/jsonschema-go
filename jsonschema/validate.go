@@ -185,7 +185,7 @@ func (st *state) validate(instance reflect.Value, schema *Schema, callerAnns *an
 	}
 
 	// strings: https://json-schema.org/draft/2020-12/draft-bhutton-json-schema-validation-01#section-6.3
-	if instance.Kind() == reflect.String && (schema.MinLength != nil || schema.MaxLength != nil || schema.Pattern != "") {
+	if isString(instance) && (schema.MinLength != nil || schema.MaxLength != nil || schema.Pattern != "") {
 		str := instance.String()
 		n := utf8.RuneCountInString(str)
 		if schema.MinLength != nil {
